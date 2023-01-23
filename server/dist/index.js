@@ -22,6 +22,9 @@ app.get('/', (req, res) => {
 });
 app.get('/categories', (req, res) => {
     getCategories().then(data => {
+        console.log(data);
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
         res.json(data);
     });
 });

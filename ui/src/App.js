@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
-
+import React, { Component }from "react";
+import CategoryList from "./CategoryList";
+import { useState } from 'react';
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+  const [categories, setCategories] = useState([]);
 
-export default App;
+  fetch('http://localhost:8000/categories')
+       .then(res => res.json().then(data => {
+           console.log(data.categories)
+           setCategories(data.categories)
+           categories.forEach(c =>{
+               //console.log(c.strCategory)
+           })
+       }))
+
+   // console.log(categories);
+
+        return (
+            <div className="App">
+                <h1>Meal-Finder</h1>
+                <h3>Select a Category:</h3>
+                <select><CategoryList categories={categories}/></select>
+            </div>
+        );
+    }
+
+    export default App;

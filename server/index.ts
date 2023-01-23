@@ -1,5 +1,5 @@
 import express, { Express, Request, Response } from 'express';
-import dotenv from 'dotenv';    
+import dotenv from 'dotenv';
 
 dotenv.config();
 
@@ -12,6 +12,9 @@ app.get('/', (req: Request, res: Response) => {
 
 app.get('/categories', (req: Request, res: Response) => {
     getCategories().then(data => {
+        console.log(data);
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
         res.json(data);
     });
 })
