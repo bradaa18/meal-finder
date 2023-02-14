@@ -37,6 +37,21 @@ app.get('/category', (req: Request, res: Response) => {
     });
 });
 
+app.get('/meal', (req: Request, res: Response) => {
+  getMeal(req.query.id + '').then(data => {
+    console.log(data);
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.json(data);
+  });
+});
+
+async function getMeal(id: string): Promise<any> {
+    const response = await fetch('https://www.themealdb.com/api/json/v1/1/lookup.php?i=' + id);
+    const data = await response.json();
+    return data;
+}
+
 async function getCategory(name: string): Promise<any> {
   console.log(name);
     const response = await fetch('https://www.themealdb.com/api/json/v1/1/filter.php?c=' + name);
