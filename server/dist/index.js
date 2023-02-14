@@ -36,6 +36,22 @@ app.get('/meal/random', (req, res) => {
         res.json(data);
     });
 });
+app.get('/category', (req, res) => {
+    getCategory(req.query.name + '').then(data => {
+        console.log(data);
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+        res.json(data);
+    });
+});
+function getCategory(name) {
+    return __awaiter(this, void 0, void 0, function* () {
+        console.log(name);
+        const response = yield fetch('https://www.themealdb.com/api/json/v1/1/filter.php?c=' + name);
+        const data = yield response.json();
+        return data;
+    });
+}
 function getRandomMeal() {
     return __awaiter(this, void 0, void 0, function* () {
         const response = yield fetch('https://www.themealdb.com/api/json/v1/1/random.php');
