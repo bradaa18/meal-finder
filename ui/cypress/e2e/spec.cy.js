@@ -12,4 +12,10 @@ describe('ui test', () => {
     cy.visit('http://localhost:3000')
     cy.get('p').its('length').should("gt", 0)
   })
+
+  it('should show a meal', () => {
+    cy.visit('http://localhost:3000')
+    cy.get('span').its('length').should("gt", 0)
+  })
+
 })
